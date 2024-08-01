@@ -45,10 +45,10 @@ function App() {
 
        useEffect(() => {
         async function fetchData (){
-        const response= await fetch("https://strapi-store-server.onrender.com/api/products");
+        const response= await fetch("http://localhost:8080/api/product/get");
         const result=await response.json();
         //console.log(result.data);
-        const quantityCollect= quantityAddFunction(result.data);
+        // const quantityCollect= quantityAddFunction(result.data);
         // console.log(quantityCollect);
         setProducts(result.data);
         

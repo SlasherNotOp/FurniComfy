@@ -54,17 +54,11 @@ public class ProductController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Product>>GetAllProducts( @RequestHeader("Authorization") String jwt) throws Exception {
-
-        User user= userService.findUserByJwtToken(jwt);
-
-        if(user==null){
-            throw new Exception("jwt token is incorrect");
-        }
+    public ResponseEntity<List<Product>>GetAllProducts() throws Exception {
 
         List<Product> products= productService.getAllProducts();
 
-        return new ResponseEntity<>(products, HttpStatus.CREATED);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
 
