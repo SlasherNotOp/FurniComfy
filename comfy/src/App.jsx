@@ -47,19 +47,14 @@ function App() {
         async function fetchData (){
         const response= await fetch("http://localhost:8080/api/product/get");
         const result=await response.json();
-        //console.log(result.data);
-        // const quantityCollect= quantityAddFunction(result.data);
-        // console.log(quantityCollect);
-        setProducts(result.data);
+        console.log(result);
+        
+        setProducts(result);
         
       }
       fetchData()
 
-      function quantityAddFunction(quantities){
-        quantities.map((q)=>{
-          return q.Qunatity=1;
-        })
-      }
+      
 
         
 

@@ -11,7 +11,7 @@ const Cart = () => {
   useEffect(() => {
     const calculateTotalPrice = () => {
       const total = cart.reduce((sum, item) => {
-        return sum + ((item.attributes.price/100) * item.Qunatity);
+        return sum + ((item.attributes.price/100) * item.quantity);
       }, 0);
       setTotalPrice(total);
     };
@@ -25,7 +25,7 @@ const Cart = () => {
   function increaseQuantity(id){
     setCart( cart.map((singleC)=>{
       if(singleC.id===id){
-        return {...singleC, Qunatity:singleC.Qunatity+1};
+        return {...singleC, quantity:singleC.quantity+1};
       }
       return singleC;
     }))
@@ -34,7 +34,7 @@ const Cart = () => {
   function decreaseQuantity(id){
     setCart( cart.map((singleC)=>{
       if(singleC.id===id){
-        return {...singleC, Qunatity:singleC.Qunatity-1};
+        return {...singleC, quantity:singleC.quantity-1};
       }
       return singleC;
     }))
@@ -53,6 +53,7 @@ const Cart = () => {
     <main className='flex w-[60%] flex-wrap'>
       
         {cart.map((item,index)=>{
+          
           return(
          
           
@@ -76,7 +77,7 @@ const Cart = () => {
                     >
                       -
                     </button>
-            {item.Qunatity}
+            {item.quantity}
             <button
                       onClick={() => increaseQuantity(item.id)}
                       className='text-green-600  cursor-pointer px-2'
