@@ -1,19 +1,57 @@
-import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { FaMoon } from "react-icons/fa";
 import { ecomContext } from "./App";
 
 const Header = () => {
 
-  const {cart}=useContext(ecomContext);
+  const {cart,jwtToken}=useContext(ecomContext);
+
+  
+const navigate=useNavigate();
+
+  useEffect(()=>{
+    console.log(jwtToken)
+  },[cart])
+  
 
   return (
     <>
       <div className="w-[100vw]">
         <div className="h-[2rem] bg-[#222831] pr-[15rem] flex justify-end gap-[1rem] items-center w-[100%] text-white ">
+            
+           {
+           
+              
+              jwtToken!=null?<span className="cursor-pointer " onClick={
+              ()=>{
+                localStorage.clear();
+              
+              window.location.href =("/")
+              // navigate("/")
+              
+              }
+            }>Logout</span>:
+            <>
             <span><Link to={"/sign-in"}>Sign in/Guest</Link></span>
             <span><Link to={"/sign-up"}>Create Account</Link></span>
+            </>
+
+            
+           }
+
+            
+
+              
+           
+            
+            
+            
+
+            
+
+
         </div>
         <div className="flex justify-between px-[15rem] bg-blue-100">
             <h2 className=" bg-blue-500 my-2 rounded-xl text-3xl font-semibold text-blue-100 px-4 py-1">

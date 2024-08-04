@@ -10,6 +10,9 @@ function App() {
   const [cart, setCart]=useState([]);
   const [singleProduct,setSingleProduct]=useState({});
 
+  const [responseData,setResponseData]=useState({});
+  const [jwtToken, setJwtToken]=useState("");
+
 
  
   function checkCart(cartProductId){
@@ -50,6 +53,8 @@ function App() {
         console.log(result);
         
         setProducts(result);
+
+        setJwtToken( localStorage.getItem("jwt"))
         
       }
       fetchData()
@@ -71,10 +76,11 @@ function App() {
        setCart(cart.filter(sc=>sc.id!=cartIdDelete))
 
       }
+      
 
   return (
     <>
-      <ecomContext.Provider value={{ products,deleteItemFromCart, setProducts, cart, setCart, handleCart,handleClick,singleProduct,setSingleProduct}}>
+      <ecomContext.Provider value={{jwtToken, setJwtToken, responseData,setResponseData, products,deleteItemFromCart, setProducts, cart, setCart, handleCart,handleClick,singleProduct,setSingleProduct}}>
         <Links />
       </ecomContext.Provider>
     </>

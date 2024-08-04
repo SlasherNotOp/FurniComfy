@@ -1,29 +1,39 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaEyeSlash } from "react-icons/fa";
 import { IoMdEye } from "react-icons/io";
+import {  useNavigate } from 'react-router-dom';
+import { ecomContext } from './App';
 
 const Sign = () => {
     const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 const [showPassword,SetShowPassword]=useState(true);
-const [responseData,setResponseData]=useState({});
+
+const{ responseData,setResponseData,jwtToken, setJwtToken }=useContext(ecomContext);
+
+
+
+
+
+const navigate=useNavigate();
 
 const [errorDesc,setErrorDesc]=useState();
 
-const handleSubmit = (e) => {
+const handleSubmit = async(e) => {
   e.preventDefault();
   // Handle sign-in logic here
   console.log('Email:', email);
   console.log('Password:', password);
 
-  sendData();
+    await sendData();
 
 };
 
 
-function sendData(){
-    axios.post("http://localhost:8080/api/auth/signin",{
+
+const sendData= async()=>{
+     await axios.post("http://localhost:8080/api/auth/signin",{
         email,
         password
     }).then((res)=>{
@@ -33,22 +43,31 @@ function sendData(){
              setErrorDesc(res.data.errorDesc);
         }else{
             setErrorDesc("");
-            loginFunction();
+            
+             loginFunction();
         }
     })
 }
 
+
+
+
 function loginFunction(){
+
+  if(responseData!=null){
+
+    localStorage.setItem("jwt",responseData.data.jwt)
+  }
     
+  window.location.href="/"
+  // navigate("/")
+
 }
-
-console.log(responseData.data.jwt);
-
 
 
 
 return (
-  <div className="flex items-center justify-center min-h-screen">
+  <div className="flex items-center justify-center h-[80vh]">
     <div className="w-full max-w-md p-8 space-y-6 bg-blue-100 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-center">Sign In</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
