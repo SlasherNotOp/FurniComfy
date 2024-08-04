@@ -2,6 +2,7 @@ package com.furnitures.Controller;
 
 import com.furnitures.Entity.USER_ROLE;
 import com.furnitures.Entity.User;
+import com.furnitures.Exception.ResourceNotFoundException;
 import com.furnitures.Repository.UserRepository;
 import com.furnitures.Request.LoginRequest;
 import com.furnitures.Response.AuthResponse;
@@ -73,7 +74,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse>signin(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<AuthResponse>signin(@RequestBody LoginRequest loginRequest) throws Exception{
 
         String username=loginRequest.getEmail();
         String password=loginRequest.getPassword();
@@ -95,13 +96,19 @@ public class AuthController {
     }
 
 
-    private Authentication authenticate(String username, String password) {
-        UserDetails userDetails=customUserDetailsService.loadUserByUsername(username);
-        if(userDetails==null){
-            throw new BadCredentialsException("Invalid username..");
+    private Authentication authenticate(String username, String password) throws Exception{
+        User user= userRepository.findByEmail(username);
+
+        if(user==null){
+            throw new ResourceNotFoundException("Invalid EmailId");
         }
+
+
+        UserDetails userDetails=customUserDetailsService.loadUserByUsername(username);
+
         if(!passwordEncoder.matches(password,userDetails.getPassword())){
-            throw new BadCredentialsException("Invalid Password....");
+            throw new ResourceNotFoundException("Invalid Password...");
+
         }
 
 

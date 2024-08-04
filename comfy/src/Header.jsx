@@ -12,8 +12,8 @@ const Header = () => {
     <>
       <div className="w-[100vw]">
         <div className="h-[2rem] bg-[#222831] pr-[15rem] flex justify-end gap-[1rem] items-center w-[100%] text-white ">
-            <span><Link to={"/"}>Sign in/Guest</Link></span>
-            <span><Link to={"/"}>Create Account</Link></span>
+            <span><Link to={"/sign-in"}>Sign in/Guest</Link></span>
+            <span><Link to={"/sign-up"}>Create Account</Link></span>
         </div>
         <div className="flex justify-between px-[15rem] bg-blue-100">
             <h2 className=" bg-blue-500 my-2 rounded-xl text-3xl font-semibold text-blue-100 px-4 py-1">

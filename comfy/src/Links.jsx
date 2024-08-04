@@ -6,6 +6,8 @@ import Products from "./Products"
 import Cart from './Cart'
 
 import SingleProduct from "./SingleProduct";
+import Sign from "./Sign";
+import SignUp from "./SignUp";
 
 function Links() {
   return (
@@ -19,6 +21,9 @@ function Links() {
         <Route path="/products" element={<Products/>} ></Route>
         <Route path="/products/:id" element={<SingleProduct/>}></Route>
         <Route path="/cart" element={<Cart/>} ></Route>
+        <Route path="/sign-in" element={<Sign/>}/>
+        <Route path="/sign-up" element={<SignUp/>}/>
+
         </Routes>
         </div>
       </BrowserRouter>
