@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { ecomContext } from './App';
+import FilterDivC from './FilterDivC';
 
 const Products = () => {
 
@@ -9,6 +10,7 @@ const Products = () => {
 
   return (
     <div>
+    <FilterDivC/>
       
       <div className='flex justify-between flex-wrap relative z-0'>
       {  

@@ -71,7 +71,7 @@ const Cart = () => {
 
             <p>
             
-            <button
+            <button disabled={item.quantity==1?true:false}
                       onClick={() => decreaseQuantity(item.id)}
                       className='text-green-600  cursor-pointer px-2'
                     >

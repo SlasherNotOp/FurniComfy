@@ -6,7 +6,7 @@ import { ecomContext } from "./App";
 
 const Header = () => {
 
-  const {cart,jwtToken}=useContext(ecomContext);
+  const {cart,jwtToken,setJwtToken,setResponseData,responseData}=useContext(ecomContext);
 
   
 const navigate=useNavigate();
@@ -14,6 +14,30 @@ const navigate=useNavigate();
   // useEffect(()=>{
   //   console.log(jwtToken)
   // },[cart])
+
+  function timeoutFun(){
+
+    // console.log("reeeeeee")
+    // window.location.href="/"
+    // navigate("/")
+  
+    
+  }
+
+useEffect(()=>{
+  
+   setTimeout(timeoutFun,2000)
+
+},[responseData])
+
+
+function clearFunction(){
+
+  localStorage.clear();
+  navigate("/")
+  setResponseData({});
+
+}
   
 
   return (
@@ -22,13 +46,14 @@ const navigate=useNavigate();
         <div className="h-[2rem] bg-[#222831] pr-[15rem] flex justify-end gap-[1rem] items-center w-[100%] text-white ">
             
            {
-           
-              
+          
+
               jwtToken!=null?<span className="cursor-pointer " onClick={
               ()=>{
-                localStorage.clear();
-              
-              window.location.href =("/")
+
+                clearFunction();
+
+              // window.location.href =("/")
               // navigate("/")
               
               }
@@ -37,6 +62,7 @@ const navigate=useNavigate();
             <span><Link to={"/sign-in"}>Sign in/Guest</Link></span>
             <span><Link to={"/sign-up"}>Create Account</Link></span>
             </>
+         
 
             
            }
