@@ -54,15 +54,41 @@ const sendData= async()=>{
 
 function loginFunction(){
 
-  if(responseData!=null){
+  // if(responseData!=null){
 
-    localStorage.setItem("jwt",responseData.data.jwt)
-  }
+  //   localStorage.setItem("jwt",responseData.data.jwt)
+  // }
     
-  window.location.href="/"
-  // navigate("/")
+  // window.location.href="/"
+  // // navigate("/")
 
 }
+
+function timeoutFun(){
+
+  console.log("printlnting")
+  navigate("/")
+
+  
+}
+
+useEffect(()=>{
+    
+  responseData?.data?.jwt ?setJwtToken(responseData.data.jwt):"";
+  responseData?.data?.jwt ?localStorage.setItem("jwt",responseData.data.jwt):"";
+
+  responseData?.data?.jwt ? setTimeout(timeoutFun,1000):"";
+  
+
+  // if(responseData.data.jwt){
+
+  //   setJwtToken(responseData.data.jwt);
+  //   console.log(jwtToken)
+  // }
+  
+  
+},[responseData])
+
 
 
 

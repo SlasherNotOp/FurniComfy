@@ -11,9 +11,9 @@ const Header = () => {
   
 const navigate=useNavigate();
 
-  useEffect(()=>{
-    console.log(jwtToken)
-  },[cart])
+  // useEffect(()=>{
+  //   console.log(jwtToken)
+  // },[cart])
   
 
   return (

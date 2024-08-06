@@ -76,6 +76,16 @@ function App() {
        setCart(cart.filter(sc=>sc.id!=cartIdDelete))
 
       }
+
+      // useEffect(()=>{
+
+      //   if(responseData!=null){
+      //     console.log("api call")
+      //     setJwtToken(responseData.data.jwt);
+      //   }
+
+
+      // },[responseData])
       
 
   return (

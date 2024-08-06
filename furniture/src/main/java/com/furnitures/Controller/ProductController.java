@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/product")
@@ -54,12 +55,40 @@ public class ProductController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<Product>>GetAllProducts() throws Exception {
+    public ResponseEntity<List<Product>>GetAllProducts(
+                                                       @RequestParam(required = false) String search,
+                                                       @RequestParam(required = false) String category,
+                                                       @RequestParam(required = false) String company,
+                                                       @RequestParam(required = false) String sort,
+                                                       @RequestParam(required = false) Integer price,
+                                                       @RequestParam(required = false) boolean freeShipping
 
-        List<Product> products= productService.getAllProducts();
+
+                                                       ) throws Exception {
+
+        List<Product> products= productService.getAllProducts(search,category, sort ,company,price,freeShipping);
 
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    @GetMapping("get/category")
+    public ResponseEntity<Set<String>>getListOfCategory() throws Exception{
+
+        Set<String>list= productService.getListOfCategory();
+
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("get/company")
+    public ResponseEntity<Set<String>>getListOfCompany() throws Exception{
+
+        Set<String>list= productService.getListOfCompany();
+
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
+
+
+
 
 
 
