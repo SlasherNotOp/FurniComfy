@@ -24,7 +24,9 @@ const FilterDivC = () => {
       search:search,
       category:category,
       company:company,
-      sort:sort
+      sort:sort,
+      price:price,
+      freeShipping:freeShipping
     }
 
 
@@ -168,7 +170,7 @@ const FilterDivC = () => {
             onChange={(e) => setPrice(e.target.value)}
             className="w-full "
             min="0"
-            max="1000"
+            max="500"
             step="10"
             
           />

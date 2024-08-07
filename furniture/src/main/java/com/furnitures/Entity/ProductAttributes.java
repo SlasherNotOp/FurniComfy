@@ -2,6 +2,7 @@ package com.furnitures.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ProductAttributes {
     private String image;
 
     private int price;
+
 
     private boolean shipping;
 

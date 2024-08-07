@@ -3,6 +3,7 @@ package com.furnitures.Service;
 import com.furnitures.Entity.Product;
 import com.furnitures.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -39,19 +41,43 @@ public class ProductService {
 
          //pending work
          if(search!=null){
-             System.out.println(search);
-             Streamable<Product>productStreamable=productRepository.findByAttributesTitleContaining(search);
+             //System.out.println(search);
+             Streamable<Product>productStreamable=Streamable.empty();
+
+             if(sort.equals("a-z")){
+                 Sort newSort=Sort.by(Sort.Direction.ASC,"attributesTitle");
+                 productStreamable=productRepository.findByAttributesTitleContaining(search,newSort);
+
+             }
+             if (sort.equals("low")) {
+                 Sort newSort=Sort.by(Sort.Direction.ASC,"attributesPrice");
+                 productStreamable=productRepository.findByAttributesTitleContaining(search,newSort);
+             }
+             if (sort.equals("high")) {
+                 Sort newSort=Sort.by(Sort.Direction.DESC,"attributesPrice");
+                 productStreamable=productRepository.findByAttributesTitleContaining(search,newSort);
+             }
+
+
              products= productStreamable.toList();
+
+         }
+         else {
+             if(sort==null){
+                 products=productRepository.findAll();
+             }
+             else if (sort.equals("a-z")) {
+                 products = productRepository.findAllByOrderByAttributesTitleAsc();
+             } else if (sort.equals("low")) {
+                 products = productRepository.findAllByOrderByAttributesPriceAsc();
+             } else if (sort.equals("high")) {
+                 products = productRepository.findAllByOrderByAttributesPriceDesc();
+             }
          }
 
 
-         if(sort==null||sort.equals("a-z")){
-            products= productRepository.findAllByOrderByAttributesTitleAsc();
-         } else if (sort.equals("low")) {
-             products=productRepository.findAllByOrderByAttributesPriceAsc();
-         }else if (sort.equals("high")) {
-             products=productRepository.findAllByOrderByAttributesPriceDesc();
-         }
+
+
 
 
 
@@ -70,7 +96,7 @@ public class ProductService {
 
          }
          if(company!=null&&!company.equals("all")){
-             System.out.println(company);
+            // System.out.println(company);
              List<Product>companyList=new ArrayList<>();
              for(Product product1:products){
                  if(product1.getAttributes().getCompany().equals(company)) {
@@ -82,6 +108,21 @@ public class ProductService {
              products=companyList;
 
          }
+
+         if(price!=null){
+
+             List<Product> collect = products.stream().filter(pr -> (pr.getAttributes().getPrice()/100) <= price).collect(Collectors.toList());
+//             System.out.println(price);
+//             System.out.println(collect);
+             products=collect;
+         }
+         System.out.println(freeShipping);
+         if(freeShipping){
+
+
+            products=products.stream().filter(free->free.getAttributes().isShipping()).collect(Collectors.toList());
+         }
+
 
          return products;
 

@@ -13,9 +13,7 @@ const SingleProduct = () => {
   if(singleProduct?.length!=0){
   console.log(singleProduct);
   }
-    else{
-      
-  }
+    
 
   return (
     <div>
