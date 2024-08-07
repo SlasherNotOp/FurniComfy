@@ -73,6 +73,7 @@ function timeoutFun(){
 }
 
 useEffect(()=>{
+  localStorage.clear();
     
   responseData?.data?.jwt ?setJwtToken(responseData.data.jwt):"";
   responseData?.data?.jwt ?localStorage.setItem("jwt",responseData.data.jwt):"";

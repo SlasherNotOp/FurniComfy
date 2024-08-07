@@ -25,17 +25,24 @@ const navigate=useNavigate();
   }
 
 useEffect(()=>{
-  
-   setTimeout(timeoutFun,2000)
 
-},[responseData])
+  // setJwtToken("");
+    
+
+},[])
+
+
 
 
 function clearFunction(){
 
   localStorage.clear();
-  navigate("/")
   setResponseData({});
+  setJwtToken("");
+  
+ 
+  
+  
 
 }
   
@@ -48,7 +55,7 @@ function clearFunction(){
            {
           
 
-              jwtToken!=null?<span className="cursor-pointer " onClick={
+              localStorage.getItem("jwt") ? <span className="cursor-pointer " onClick={
               ()=>{
 
                 clearFunction();

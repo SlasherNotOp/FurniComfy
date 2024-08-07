@@ -52,18 +52,17 @@ function App() {
         const result=await response.json();
         console.log(result);
         
+        
         setProducts(result);
 
-        setJwtToken( localStorage.getItem("jwt"))
+        // setJwtToken( localStorage.getItem("jwt"))
         
       }
       fetchData()
 
       
-
-        
-
       }, []);
+      console.log(jwtToken)
 
 
       function handleClick(e,prod){
