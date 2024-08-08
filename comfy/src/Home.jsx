@@ -1,16 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { ecomContext } from './App';
 
 
 const Home = () => {
 
-const {products,setCart ,cart, handleCart,handleClick}= useContext(ecomContext);
+const {products,setCart ,cart,responseData, handleCart,handleClick,filterProduct,setFilterProduct}= useContext(ecomContext);
 
 
 
-const filterProduct=products.filter((product)=>product.attributes.featured===true)
-
+useEffect(()=>{
+  setFilterProduct(products.filter((product)=>product.attributes.featured===true))
+},[products])
+  
 if(filterProduct?.length!=0){
 //console.log(filterProduct);
 }

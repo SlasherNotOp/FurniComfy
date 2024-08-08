@@ -7,10 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -156,4 +153,9 @@ public class ProductService {
     }
 
 
+    public Product getProductById(Long id) {
+
+       return productRepository.findById(id).get();
+
+    }
 }

@@ -71,6 +71,17 @@ public class ProductController {
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Product>GetAllProducts(@PathVariable Long id) throws Exception {
+
+
+        Product product= productService.getProductById(id);
+
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+
+
     @GetMapping("get/category")
     public ResponseEntity<Set<String>>getListOfCategory() throws Exception{
 

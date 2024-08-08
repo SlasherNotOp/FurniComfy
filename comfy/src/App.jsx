@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { createContext, useState } from "react";
+import { Bounce, toast, ToastContainer } from "react-toastify";
 import Links from "./Links";
 
 export const ecomContext = createContext();
@@ -12,6 +13,9 @@ function App() {
 
   const [responseData,setResponseData]=useState({});
   const [jwtToken, setJwtToken]=useState("");
+
+  const [filterProduct,setFilterProduct]=useState([]);
+
 
 
  
@@ -29,16 +33,28 @@ function App() {
    
   }
 
+  
+
 
 
   function handleCart(e,product){
+    
+    
+
+
 
     if(cart.includes(product)){
+      toast.warning('Already in the cart')
+
       console.log("check")
       checkCart(product.id);
+      
 
     }else{
     setCart([...cart,product]);
+    //////////////////////////////////////////////
+    toast.success('Added to cart');
+    
   }
   
   
@@ -62,7 +78,7 @@ function App() {
 
       
       }, []);
-      console.log(jwtToken)
+      // console.log(jwtToken)
 
 
       function handleClick(e,prod){
@@ -72,8 +88,9 @@ function App() {
 
 
       function deleteItemFromCart(cartIdDelete){
-       setCart(cart.filter(sc=>sc.id!=cartIdDelete))
 
+       setCart(cart.filter(sc=>sc.id!=cartIdDelete))
+       toast.error("Deleted from cart")
       }
 
       // useEffect(()=>{
@@ -89,8 +106,11 @@ function App() {
 
   return (
     <>
-      <ecomContext.Provider value={{jwtToken, setJwtToken, responseData,setResponseData, products,deleteItemFromCart, setProducts, cart, setCart, handleCart,handleClick,singleProduct,setSingleProduct}}>
+      <ecomContext.Provider value={{jwtToken,filterProduct,setFilterProduct, setJwtToken, responseData,setResponseData, products,deleteItemFromCart, setProducts, cart, setCart, handleCart,handleClick,singleProduct,setSingleProduct}}>
         <Links />
+       
+
+
       </ecomContext.Provider>
     </>
   );

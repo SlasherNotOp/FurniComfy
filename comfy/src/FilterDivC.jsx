@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
 import { ecomContext } from './App';
 
 const FilterDivC = () => {
@@ -40,7 +41,9 @@ const FilterDivC = () => {
 
 
   const handleSearch = () => {
+
     apiFunctionGet()
+    toast.success("List updated")
 
 
   };
@@ -79,6 +82,8 @@ const FilterDivC = () => {
     setSort('a-z');
     setPrice(1000);
     setFreeShipping(false);
+
+    toast.info("List reset")
 
     apiFunctionGet();
     

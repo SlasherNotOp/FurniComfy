@@ -3,6 +3,8 @@ import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { FaMoon } from "react-icons/fa";
 import { ecomContext } from "./App";
+import { Bounce, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
 
@@ -49,7 +51,22 @@ function clearFunction(){
 
   return (
     <>
-      <div className="w-[100vw]">
+      <div className="">
+      <ToastContainer
+position="top-center"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition={Bounce}
+/>
+
+
         <div className="h-[2rem] bg-[#222831] pr-[15rem] flex justify-end gap-[1rem] items-center w-[100%] text-white ">
             
            {

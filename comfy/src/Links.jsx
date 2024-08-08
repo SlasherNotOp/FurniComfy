@@ -8,13 +8,14 @@ import Cart from './Cart'
 import SingleProduct from "./SingleProduct";
 import Sign from "./Sign";
 import SignUp from "./SignUp";
+import ProductPage from "./ProductPage";
 
 function Links() {
   return (
     <>
       <BrowserRouter>
       <Header/>
-        <div className="mx-[15rem]">
+        <div className="mx-[15rem] ">
         <Routes>
         <Route path="/" element={<Home/>} ></Route>
         <Route path="/about" element={<About/>} ></Route>
@@ -23,6 +24,7 @@ function Links() {
         <Route path="/cart" element={<Cart/>} ></Route>
         <Route path="/sign-in" element={<Sign/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
+        <Route path="/temp" element={<ProductPage/>}/>
 
         </Routes>
         </div>
