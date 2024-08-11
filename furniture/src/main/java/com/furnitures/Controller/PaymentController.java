@@ -3,11 +3,11 @@ package com.furnitures.Controller;
 import com.furnitures.Request.PaymentCartRequest;
 import com.furnitures.Service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/payment")
@@ -16,14 +16,17 @@ public class PaymentController {
     @Autowired
     PaymentService paymentService;
 
-    public ResponseEntity<?> paymentMethod(
+    @PostMapping("get")
+    public ResponseEntity<Integer> paymentMethod(
             @RequestHeader("Authorization") String jwt,
-            @RequestBody PaymentCartRequest paymentCartRequest
+            @RequestBody List<PaymentCartRequest> paymentCartRequest
     ){
-        double totolAmount= paymentService.getTotalPrice(paymentCartRequest);
+        int totolAmount= paymentService.getTotalPrice(paymentCartRequest);
+
+
         
 
-        return null;
+        return new ResponseEntity<>(totolAmount, HttpStatus.OK);
 
     }
 

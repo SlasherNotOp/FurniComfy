@@ -1,4 +1,5 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const OrderSummary = ({totalPrice,cart}) => {
@@ -28,6 +29,42 @@ const OrderSummary = ({totalPrice,cart}) => {
         }
 
         console.log(listofObj)
+
+        
+        const paymentCartRequest=listofObj;
+
+        const params={
+          paymentCartRequest:paymentCartRequest
+        }
+
+
+        
+
+          function ordersumm(){
+             axios.post("http://localhost:8080/api/payment/get",
+             paymentCartRequest
+             ,{
+              headers:{
+                "Authorization":"Bearer "+localStorage.getItem("jwt")
+              }
+             }
+          
+          
+        ).then((res)=>{
+          console.log(res)
+
+        }).catch((err)=>{
+          console.log(err)
+
+        })
+          }
+
+          ordersumm()
+
+
+        
+
+         
         
     }
 
