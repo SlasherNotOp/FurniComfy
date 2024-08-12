@@ -54,9 +54,15 @@ const Cart = () => {
   return (
   <div className='w-[80vw]'>
 
-    <h1 className='text-[2rem] pt-[4rem]'>Shopping Cart</h1>
+    <h1 className='text-[2rem] pt-[4rem]'>{
+      cart.length==0?" Cart Is Empty":"Shopping Cart"
+    } </h1>
     <hr/>
+    
+
+    
     <div className='w-[100%] flex '>
+    
     <main className='flex w-[60%] flex-wrap'>
       
         {cart.map((item,index)=>{

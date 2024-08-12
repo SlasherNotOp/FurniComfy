@@ -52,6 +52,10 @@ const OrderSummary = ({totalPrice,cart}) => {
           
         ).then((res)=>{
           console.log(res)
+          window.location.href=res.data.paymentLinkUrl
+
+        
+
 
         }).catch((err)=>{
           console.log(err)
