@@ -9,6 +9,7 @@ import SingleProduct from "./SingleProduct";
 import Sign from "./Sign";
 import SignUp from "./SignUp";
 import ProductPage from "./ProductPage";
+import Success from "./Success";
 
 function Links() {
   return (
@@ -25,6 +26,7 @@ function Links() {
         <Route path="/sign-in" element={<Sign/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/temp" element={<ProductPage/>}/>
+        <Route path="/payment/success/:userId" element={<Success/>}/>
 
         </Routes>
         </div>
