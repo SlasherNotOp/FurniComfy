@@ -65,7 +65,7 @@ public class PaymentController {
 
         paymentLinkRequest.put("notify",notify);
 
-        paymentLinkRequest.put("callback_url","https://furni-comfy-frontend.vercel.app/payment/success/"+user.getId());
+        paymentLinkRequest.put("callback_url","https://furni-comfy-frontend.vercel.app/payment/success");
 
         PaymentLink payment=razorpayClient.paymentLink.create(paymentLinkRequest);
 

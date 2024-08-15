@@ -27,7 +27,7 @@ function Links() {
         <Route path="/sign-in" element={<Sign/>}/>
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/temp" element={<ProductPage/>}/>
-        <Route path="/payment/success/:userId" element={<Success/>}/>
+        <Route path="/payment/success/:userId/*" element={<Success/>}/>
         <Route path="/order" element={<Orders/>}/>
         
 
