@@ -32,21 +32,27 @@ public class PaymentController {
     UserService userService;
 
 
-    @PostMapping("get")
+    @PostMapping("get/{address}")
     public ResponseEntity<PaymentLinkResponse> paymentMethod(
             @RequestHeader("Authorization") String jwt,
-            @RequestBody List<PaymentCartRequest> paymentCartRequest
+            @RequestBody List<PaymentCartRequest> paymentCartRequest,
+            @PathVariable String address
     ) throws Exception {
+
+        System.out.println(address);
+
         int totolAmount= paymentService.getTotalPrice(paymentCartRequest);
         totolAmount*=100;
         User user=userService.findUserByJwtToken(jwt);
+
+        paymentService.saveOrder(user,address,totolAmount,paymentCartRequest);
 
         RazorpayClient razorpayClient=new RazorpayClient(keyId,keySecret);
 
         JSONObject paymentLinkRequest=new JSONObject();
 
         paymentLinkRequest.put("amount",totolAmount);
-        paymentLinkRequest.put("currency","INR");
+        paymentLinkRequest.put("currency","USD");
 
         JSONObject customer=new JSONObject();
         customer.put("name",user.getFullName());

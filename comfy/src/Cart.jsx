@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import { ecomContext } from './App';
@@ -8,9 +9,81 @@ const Cart = () => {
   const{cart,setCart,deleteItemFromCart}=useContext(ecomContext);
   const [totalPrice,setTotalPrice]=useState(0);
 
+
+  let listofObj=[];
+
+  cart.map((item)=>{
+
+      listofObj.push({"id":item.id,"quantity":item.quantity});
+      
+  })
+
+
+  function ReqeustForAmount(address){
+
+    console.log(address)
+
+    if(!localStorage.getItem("jwt")){
+        console.log("login required")
+        navigate("/sign-in")
+        return;
+
+    }
+
+    
+
+    console.log(listofObj)
+
+    
+    const paymentCartRequest=listofObj;
+
+    const params={
+      paymentCartRequest:paymentCartRequest
+    }
+
+
+    
+
+      function ordersumm(){
+         axios.post("http://localhost:8080/api/payment/get/"+address,
+         paymentCartRequest
+         ,{
+          headers:{
+            "Authorization":"Bearer "+localStorage.getItem("jwt")
+          }
+         }
+      
+      
+    ).then((res)=>{
+      console.log(res)
+      // forSavingOrder()
+
+      
+
+      
+
+
+      window.location.href=res.data.paymentLinkUrl
+
+    
+
+
+    }).catch((err)=>{
+      console.log(err)
+
+    })
+      }
+
+      ordersumm()
+
+    
+}
+
   
 
   console.log(cart);
+
+
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -48,11 +121,26 @@ const Cart = () => {
   }
   
   
+  
+const[toggleAddress,SetToggleAddress]= useState(false);
+const[address,setAddress]=useState();
+
+function actualFunction(e){
+
+
+
+  e.preventDefault();
+
+  ReqeustForAmount(address);
+  
+
+}
 
 
 
   return (
-  <div className='w-[80vw]'>
+    <>
+  <div className= { toggleAddress?"hidden":'w-[80vw] '}>
 
     <h1 className='text-[2rem] pt-[4rem]'>{
       cart.length==0?" Cart Is Empty":"Shopping Cart"
@@ -125,7 +213,8 @@ const Cart = () => {
       <div className='p-10 w-1/3 '>
       <div className='' >
       {/* total cash <span>{totalPrice}</span> */}
-      <OrderSummary totalPrice={totalPrice} cart={cart}/>
+      {/* /////////////////////////////////////////// */}
+      <OrderSummary ReqeustForAmount={ReqeustForAmount} totalPrice={totalPrice} cart={cart}  toggleAddress={toggleAddress} SetToggleAddress={SetToggleAddress}/>
       </div>
       
        </div>
@@ -136,6 +225,35 @@ const Cart = () => {
 
       </div>
   </div>
+
+
+  <div className= { toggleAddress?"flex items-center justify-center h-[80vh]":"hidden"}>
+  <div className="w-full max-w-md p-8 bg-blue-100 rounded-lg shadow-md">
+    <form onSubmit={(e)=>{actualFunction(e)}} className="space-y-4">
+      <div>
+        <input
+          type="text"
+          id="address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+          placeholder="Address"
+          className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+
+
+
+  </>
   )
 }
 

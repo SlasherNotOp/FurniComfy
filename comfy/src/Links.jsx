@@ -10,6 +10,7 @@ import Sign from "./Sign";
 import SignUp from "./SignUp";
 import ProductPage from "./ProductPage";
 import Success from "./Success";
+import Orders from "./Orders";
 
 function Links() {
   return (
@@ -27,6 +28,8 @@ function Links() {
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/temp" element={<ProductPage/>}/>
         <Route path="/payment/success/:userId" element={<Success/>}/>
+        <Route path="/order" element={<Orders/>}/>
+        
 
         </Routes>
         </div>

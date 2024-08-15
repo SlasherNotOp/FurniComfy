@@ -72,7 +72,7 @@ transition={Bounce}
            {
           
 
-              localStorage.getItem("jwt") ? <span className="cursor-pointer " onClick={
+              localStorage.getItem("jwt") ?<><p>Hello User</p> <span className="cursor-pointer  text-blue-500 border-blue-500 border hover:text-blue-600 hover:border-blue-600 px-4 rounded-lg transition duration-300 ease-in-out shadow-md focus:outline-dashed focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 " onClick={
               ()=>{
 
                 clearFunction();
@@ -81,7 +81,7 @@ transition={Bounce}
               // navigate("/")
               
               }
-            }>Logout</span>:
+            }>Logout</span></>:
             <>
             <span><Link to={"/sign-in"}>Sign in/Guest</Link></span>
             <span><Link to={"/sign-up"}>Create Account</Link></span>
@@ -132,6 +132,11 @@ transition={Bounce}
                <NavLink className={({ isActive }) =>
               isActive ? "bg-[#222831] text-white py-2 px-3 rounded" : "hover:bg-[#748299]  hover:text-white hover:py-2 px-3 rounded"
             } to={"/cart"}>Cart</NavLink>
+            </li>
+            <li>
+               <NavLink className={({ isActive }) =>
+              isActive ? "bg-[#222831] text-white py-2 px-3 rounded" : "hover:bg-[#748299]  hover:text-white hover:py-2 px-3 rounded"
+            } to={"/order"}>Orders</NavLink>
             </li>
 
 
